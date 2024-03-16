@@ -1,6 +1,8 @@
 import { useRef, useState } from "react"
 import classes from "./PresetItem.module.css"
-export default function PresetItem({filePath,setPresetSrc,type}){
+import { motion } from "framer-motion"
+
+export default function PresetItem({filePath,color}){
   const [isPlaying,setIsPlaying]=useState(false)
   const audioRef = useRef()
   const [volume,setVolume] = useState(0.5)
@@ -24,18 +26,25 @@ export default function PresetItem({filePath,setPresetSrc,type}){
   const parts = filePath.split(/[\\/]/);
   const fileName = parts[parts.length - 1];
   const songName = fileName.replace(/\.[^/.]+$/, "");
-  
-  let activeClass = isPlaying?classes.activeButton:classes.drum
+  let colorClass ;
+  if(colorClass=='blue'){
+    colorClass = classes.blueButton
+  }
+  let activeClass = isPlaying?classes.activeButton:classes.blueButton
   let buttonClass =  classes.beatsButton + ' ' + activeClass
 
 
   return (
-    <div className={classes.presetItem} >
+    <motion.div
+    initial={{scale:0}}
+    whileTap={{scale:1.1}}
+    animate={{scale:1}}
+     className={classes.presetItem} >
       <audio src={filePath} ref={audioRef} loop></audio>
       <div className={classes.beats}>
       <button  className={buttonClass}  onClick={togglePlayPause}><span className={classes.beatSpan}>{songName}</span></button>
       </div>
       <input type="range" min={0} max={1} step={0.01} value={volume} name="volume" id="presetVolume" onChange={handleVolumeChange}/>
-    </div>
+    </motion.div>
   )
 }

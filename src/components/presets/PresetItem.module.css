@@ -1,5 +1,4 @@
-.presetItem{
-}
+
 .beats .drum{
   width:100px;
   height:100px;
@@ -8,11 +7,12 @@
 }
 
 .beatsButton{
+  font-family: monospace;
   cursor:pointer;
   margin-top:10px;
   margin-left:10px;
   text-transform:uppercase;
-  border:solid pink;
+  border:solid black;
 }
 .beatSpan{
   bottom:20px;
@@ -25,4 +25,12 @@
   height:100px;
   border-radius:10px;
   background:linear-gradient(rgb(255, 234, 0),red);
+}
+.blueButton{
+  width:100px;
+  height:100px;
+  border-radius:10px;
+  font-weight: 700;
+  color: white;
+  background:linear-gradient(rgba(0,95,115,1),#099396 );
 }

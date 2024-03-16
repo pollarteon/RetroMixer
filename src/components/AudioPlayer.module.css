@@ -35,12 +35,13 @@
 
 .playPause {
   background: var(--primary);
-  border: none;
+  border: solid black;
   border-radius: 12px;
   width: 50px;
   height: 50px;
   font-size: 32px;
   color: var(--secondary);
+  text-shadow:1px 1px 1px 1px black;
   display: flex;
   justify-content: center;
   align-items:center;

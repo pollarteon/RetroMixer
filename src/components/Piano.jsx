@@ -4,6 +4,7 @@ export default function Piano() {
   return (
     <div classNameName="piano">
       <div classNameName={classes['piano-keys']}>
+        
       <TonesButton  color={'white'} keybutton={"c3"}/>
       <TonesButton  color={'black'} keybutton={"db3"} />
       <TonesButton  color={'white'} keybutton={"d3"} />
@@ -43,46 +44,6 @@ export default function Piano() {
       <TonesButton color={'black'} keybutton={"bb5"} />
       <TonesButton color={'white'} keybutton={"b5"} />
       </div>
-      {/* <div className="piano-keys">
-            <button className={classes['key white']}></button>
-            <button className={classes['key black']}></button>
-            <button className="key white"></button>
-            <button className="key black"><span>eb3</span></button>
-            <button className="key white"><span>e3</span></button>
-            <button className="key white"><span>f3</span></button>
-            <button className="key black"><span>gb3</span></button>
-            <button className="key white"><span>g3</span></button>
-            <button className="key black"><span>ab3</span></button>
-            <button className="key white"><span>a3</span></button>
-            <button className="key black"><span>bb3</span></button>
-            <button className="key white"><span>b3</span></button>
-            <button className="key white"><span>c4</span></button>
-            <button className="key black"><span>db4</span></button>
-            <button className="key white"><span>d4</span></button>
-            <button className="key black"><span>eb4</span></button>
-            <button className="key white"><span>e4</span></button></div>
-        <div className="piano-keys">
-            <button className="key white"><span>f4</span></button>
-            <button className="key black"><span>gb4</span></button>
-            <button className="key white"><span>g4</span></button>
-            <button className="key black"><span>ab4</span></button>
-            <button className="key white"><span>a4</span></button>
-            <button className="key black"><span>bb4</span></button>
-            <button className="key white"><span>b4</span></button>
-            <button className="key white"><span>c5</span></button>
-            <button className="key black"><span>db5</span></button>
-            <button className="key white"><span>d5</span></button>
-            <button className="key black"><span>eb5</span></button>
-            <button className="key white"><span>e5</span></button>
-            <button className="key white"><span>f5</span></button>
-            <button className="key black"><span>gb5</span></button>
-            <button className="key white"><span>g5</span></button>
-            <button className="key black"><span>ab5</span></button>
-            <button className="key white"><span>a5</span></button>
-            <button className="key black"><span>bb5</span></button>
-            <button className="key white"><span>b5</span></button>
-        </div>
-        </div> */} 
     </div>
   );
 }

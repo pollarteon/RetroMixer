@@ -46,6 +46,11 @@ function App() {
 
   return (
     <>
+      <motion.h1
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      className={classes.heading}
+      >Retro Remix Music Player</motion.h1>
       <div className={classes.appContainer}>
         <motion.div className={classes.audioPlayer1}>
           <AudioPlayer audioArray={songsArray} />
