@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import './App.css'
 import AudioPlayer from './components/AudioPlayer'
 import RemixBoard from './components/RemixBoard'
+import PresetList from './components/presets/PresetList'
 function App() {
   const beatsArray =[
     "/audio/background-music-for-video-blog-cyborg-in-me-30-second-188534.mp3",
@@ -15,6 +16,7 @@ function App() {
       <RemixBoard  />
       <AudioPlayer audioArray={beatsArray}  />
       <AudioPlayer audioArray={beatsArray}  />
+      <PresetList presetArray={beatsArray}/>
     </div>
   )
 }

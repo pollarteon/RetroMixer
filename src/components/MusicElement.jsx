@@ -6,7 +6,6 @@ export default function MusicElement({ filePath,setSrc }) {
   function handleSelect(src){
     setSrc(src)
   }
-  console.log(songName);
   return (
     <div onClick={()=>handleSelect(filePath)}>
       <h2>Title:</h2>
