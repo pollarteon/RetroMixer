@@ -1,0 +1,48 @@
+.heading{
+  font-family: monospace;
+  font-weight: 900;
+  text-align: center;
+}
+.appContainer{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 1em;
+}
+.row1{
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+.audioPlayer1{
+  grid-column-start: 1;
+  grid-column-end: 5;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  border: solid black 2px;
+}
+.presetRow{
+  grid-column-start: 1;
+  grid-column-end: 5;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (min-width: 0px) and (max-width: 1340px) {
+  .audioPlayer1{
+    display:grid;
+    grid-template-columns: repeat(1,1fr);
+    width:100%
+  }
+}
+.color{
+  color:#01121A ;
+  color:#005F73  ;
+  color:#099396  ;
+  color:#93D2BD  ;
+  color:#EBD7A5  ;
+  color:#ED9B00  ;
+  color:#CA6702  ;
+  color:#BB3F02  ;
+  color:#AF2013  ;
+  color:#9C2227  ;
+  color:#ea5459  ;
+  color:#f7ba2c  ;
+}
