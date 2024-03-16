@@ -1,112 +1,132 @@
-import { useDispatch, useSelector } from "react-redux";
-import { audioActions } from "../store/audioSlice";
-import { useEffect, useRef, useState } from "react";
-import classes from "./AudioPlayer.module.css";
+import React, { useState, useRef, useEffect } from "react";
+import styles from "./AudioPlayer.module.css";
+import { BsArrowLeftShort } from "react-icons/bs";
+import { BsArrowRightShort } from "react-icons/bs";
+import { FaPlay } from "react-icons/fa";
+import { FaPause } from "react-icons/fa";
+import TempoSlider from "./TempoSlider";
+import VolumeSlider from "./VolumeSlider";
+import AudioFiles from "./AudioFiles";
 
-export default function AudioPlayer({ src }) {
-  const isPlaying = useSelector((state) => state.audio.isPlaying);
-  const currentTime = useSelector((state) => state.audio.currentTime);
-  const tempo = useSelector((state) => state.audio.tempo);
 
-  const audioRef = useRef();
-  const dispatch = useDispatch();
+export default function AudioPlayer({audioArray}) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [tempo, setTempo] = useState(1);
+  const [volume, setVolume] = useState(0.5);
+  const [src, setSrc] = useState(undefined);
+  const audioPlayer = useRef();
+  const progressBar = useRef();
+  const animationRef = useRef();
   const [file, setFile] = useState(null);
 
   useEffect(() => {
     if (file) {
       const fileReader = new FileReader();
       fileReader.onload = () => {
-        audioRef.current.src = fileReader.result;
-        dispatch(audioActions.setSrc(fileReader.result));
+        audioPlayer.current.src = fileReader.result;
+        setSrc(fileReader.result);
       };
       fileReader.readAsDataURL(file);
     }
   }, [file]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (
-        audioRef.current &&
-        audioRef.current.currentTime !== undefined &&
-        audioRef.current.currentTime !== audioRef.current.duration
-      ) {
-        dispatch(audioActions.setCurrentTime(audioRef.current.currentTime));
-      }
-    }, 1000);
+    const seconds = Math.floor(audioPlayer.current.duration);
+    setDuration(seconds);
+    progressBar.current.max = seconds;
+  }, [
+    audioPlayer?.current?.loadedmetadata,
+    audioPlayer?.current?.readyState,
+    src,
+  ]);
 
-    return () => clearInterval(intervalId);
-  }, [currentTime]);
-
-  
-  function togglePlayHandler() {
-    // Check if the audio has reached its end
-    if (audioRef.current.currentTime === audioRef.current.duration) {
-      // Reset currentTime to 0 and pause the audio
-      audioRef.current.currentTime = 0;
-      audioRef.current.pause();
-
-      // Update isPlaying state to false
-      dispatch(audioActions.toggleIsPlaying(false));
+  const calculateTime = (secs) => {
+    const minutes = Math.floor(secs / 60);
+    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const seconds = Math.floor(secs % 60);
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    return `${returnedMinutes}:${returnedSeconds}`;
+  };
+  const togglePlayPause = () => {
+    const prevValue = isPlaying;
+    setIsPlaying(!prevValue);
+    if (!prevValue) {
+      audioPlayer.current.play();
+      animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
-      // Toggle play/pause state
-      dispatch(audioActions.toggleIsPlaying());
-
-      // Play or pause the audio accordingly
-      if (!isPlaying) {
-        audioRef.current.play();
-        dispatch(audioActions.setAudioDuration(audioRef.current.duration));
-      } else {
-        audioRef.current.pause();
-      }
+      audioPlayer.current.pause();
+      cancelAnimationFrame(animationRef.current);
     }
+  };
+
+  const whilePlaying = () => {
+    progressBar.current.value = audioPlayer.current.currentTime;
+    changePlayerCurrentTime();
+    animationRef.current = requestAnimationFrame(whilePlaying);
+  };
+
+  const changeRange = () => {
+    audioPlayer.current.currentTime = progressBar.current.value;
+    changePlayerCurrentTime();
+  };
+
+  const changePlayerCurrentTime = () => {
+    progressBar.current.style.setProperty(
+      "--seek-before-width",
+      `${(progressBar.current.value / duration) * 100}%`
+    );
+    setCurrentTime(progressBar.current.value);
+  };
+
+  const backThirty = () => {
+    progressBar.current.value = Number(progressBar.current.value - 30);
+    changeRange();
+  };
+
+  const forwardThirty = () => {
+    progressBar.current.value = Number(progressBar.current.value + 30);
+    changeRange();
+  };
+  if (audioPlayer.current) {
+    audioPlayer.current.playbackRate = tempo;
+    audioPlayer.current.volume = volume;
   }
-  const handleProgressChange = (e) => {
-    const newTime = e.target.value;
-    audioRef.current.currentTime = newTime;
-    dispatch(audioActions.setCurrentTime(newTime));
-  };
-  
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
-    audioRef.current.volume = newVolume;
-  };
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
   return (
-    <>
-      <input type="file" accept="audio/*" onChange={handleFileChange} />
-      
-      <div className={classes["audio-player"]}>
-        <audio ref={audioRef}>
-          <source src={src} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-        <input
-          type="range"
-          name="progress"
-          id="progress"
-          min={0}
-          max={audioRef.current && audioRef.current.duration}
-          step={0.00001}
-          value={currentTime}
-          onChange={handleProgressChange}
-          className={classes["progress-bar"]}
-        />
-        <button className={classes["play-button"]} onClick={togglePlayHandler}>
-          {isPlaying ? "Pause" : "Play"}
+    <div>
+      <div className={styles.audioPlayer}>
+        <AudioFiles audioArray={audioArray} setSrc={setSrc}/>
+        <input type="file" accept="audio/*" onChange={handleFileChange} />
+        <audio ref={audioPlayer} src={src} preload="metadata"></audio>
+        <button className={styles.forwardBackward} onClick={backThirty}>
+          <BsArrowLeftShort /> 30
         </button>
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          defaultValue={1}
-          onChange={handleVolumeChange}
-          className={classes["volume-bar"]}
-        />
-          
+        <button onClick={togglePlayPause} className={styles.playPause}>
+          {isPlaying ? <FaPause /> : <FaPlay className={styles.play} />}
+        </button>
+        <button className={styles.forwardBackward} onClick={forwardThirty}>
+          30 <BsArrowRightShort />
+        </button>
+        <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
+        <div>
+          <input
+            type="range"
+            className={styles.progressBar}
+            defaultValue="0"
+            ref={progressBar}
+            onChange={changeRange}
+          />
+        </div>
+        <div className={styles.duration}>
+          {duration && !isNaN(duration) && calculateTime(duration)}
+        </div>
       </div>
-    </>
+      <TempoSlider tempo={tempo} setTempo={setTempo} />
+      <VolumeSlider volume={volume} setVolume={setVolume} />
+    </div>
   );
 }

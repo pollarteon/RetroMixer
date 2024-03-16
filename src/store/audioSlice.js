@@ -6,7 +6,11 @@ const audioSlice = createSlice({
     isPlaying:false,
     currentTime:0,
     duration:0,
-    tempo:1
+    tempo:1,
+    bassLevel:0,
+    audioRef:undefined,
+    src:undefined,
+    volume:0.5
   },
   reducers:{
     toggleIsPlaying(state,action){
@@ -27,6 +31,20 @@ const audioSlice = createSlice({
     setTempo(state,action){
       const newTempo = action.payload
       state.tempo = newTempo
+    },
+    setBassLevel(state,action){
+      const newBass = action.payload
+      state.bassLevel = newBass
+    },
+    setAudioRef(state,action){
+      const audioRef = action.payload
+      state.audioRef = audioRef
+    },
+    setSrc(state,action){
+      state.src = action.payload
+    },
+    setVolume(state,action){
+      state.volume = action.payload
     }
   }
 })
