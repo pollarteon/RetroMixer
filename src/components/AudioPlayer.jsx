@@ -7,9 +7,9 @@ import { FaPause } from "react-icons/fa";
 import TempoSlider from "./TempoSlider";
 import VolumeSlider from "./VolumeSlider";
 import AudioFiles from "./AudioFiles";
+import AddButton from "./AddButton/AddButton";
 
-
-export default function AudioPlayer({audioArray}) {
+export default function AudioPlayer({ audioArray }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -19,7 +19,7 @@ export default function AudioPlayer({audioArray}) {
   const audioPlayer = useRef();
   const progressBar = useRef();
   const animationRef = useRef();
-  const [displayDropBox,setDisplayDropBox] = useState(false)
+  const [displayDropBox, setDisplayDropBox] = useState(false);
   const [file, setFile] = useState(null);
 
   useEffect(() => {
@@ -94,19 +94,15 @@ export default function AudioPlayer({audioArray}) {
     audioPlayer.current.playbackRate = tempo;
     audioPlayer.current.volume = volume;
   }
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  const openDropBox = () => {
+    setDisplayDropBox(true);
   };
-  const openDropBox = ()=>{
-    setDisplayDropBox(true)
-  }
-  function closeDropBox(){
-    setDisplayDropBox(false)
+  function closeDropBox() {
+    setDisplayDropBox(false);
   }
   return (
-    <div>
+    <div className={styles.audioPlayerContainer}>
       <div className={styles.audioPlayer}>
-        <button onClick={openDropBox}>Add Audio</button>
         <audio ref={audioPlayer} src={src} preload="metadata"></audio>
         <button className={styles.forwardBackward} onClick={backThirty}>
           <BsArrowLeftShort /> 30
@@ -133,7 +129,14 @@ export default function AudioPlayer({audioArray}) {
       </div>
       <TempoSlider tempo={tempo} setTempo={setTempo} />
       <VolumeSlider volume={volume} setVolume={setVolume} />
-      {displayDropBox &&  <AudioFiles audioArray={audioArray} setSrc={setSrc} closeDropBox={closeDropBox}/>}
+      <AddButton label={"Audio"} onclickFunction={openDropBox} />
+      {displayDropBox && (
+        <AudioFiles
+          audioArray={audioArray}
+          setSrc={setSrc}
+          closeDropBox={closeDropBox}
+        />
+      )}
     </div>
   );
 }

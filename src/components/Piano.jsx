@@ -2,31 +2,9 @@ import TonesButton from "./RemixButtons/TonesButton";
 export default function Piano() {
   return (
     <div className="piano">
-      <TonesButton keybutton={"c1"} />
-      <TonesButton keybutton={"db1"} />
-      <TonesButton keybutton={"d1"} />
-      <TonesButton keybutton={"eb1"} />
-      <TonesButton keybutton={"e1"} />
-      <TonesButton keybutton={"f1"} />
-      <TonesButton keybutton={"gb1"} />
-      <TonesButton keybutton={"g1"} />
-      <TonesButton keybutton={"ab1"} />
-      <TonesButton keybutton={"a1"} />
-      <TonesButton keybutton={"bb1"} />
-      <TonesButton keybutton={"b1"} />
       
-      <TonesButton keybutton={"c2"} />
-      <TonesButton keybutton={"db2"} />
-      <TonesButton keybutton={"d2"} />
-      <TonesButton keybutton={"eb2"} />
-      <TonesButton keybutton={"e2"} />
-      <TonesButton keybutton={"f2"} />
-      <TonesButton keybutton={"gb2"} />
-      <TonesButton keybutton={"g2"} />
-      <TonesButton keybutton={"ab2"} />
-      <TonesButton keybutton={"a2"} />
-      <TonesButton keybutton={"bb2"} />
-      <TonesButton keybutton={"b2"} />
+      
+      
 
       <TonesButton keybutton={"c3"} />
       <TonesButton keybutton={"db3"} />
@@ -67,18 +45,7 @@ export default function Piano() {
       <TonesButton keybutton={"bb5"} />
       <TonesButton keybutton={"b5"} />
 
-      <TonesButton keybutton={"c6"} />
-      <TonesButton keybutton={"db6"} />
-      <TonesButton keybutton={"d6"} />
-      <TonesButton keybutton={"eb6"} />
-      <TonesButton keybutton={"e6"} />
-      <TonesButton keybutton={"f6"} />
-      <TonesButton keybutton={"gb6"} />
-      <TonesButton keybutton={"g6"} />
-      <TonesButton keybutton={"ab6"} />
-      <TonesButton keybutton={"a6"} />
-      <TonesButton keybutton={"bb6"} />
-      <TonesButton keybutton={"b6"} />
+      
     </div>
   );
 }

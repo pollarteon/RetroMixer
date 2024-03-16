@@ -9,8 +9,8 @@ export default function TempoSlider({tempo,setTempo}){
   };
   return (
     <div className={classes.inputWrapper}>
-    <label htmlFor="tempo">Tempo:</label>
-    <input
+    <label className={classes.tempoLabel} htmlFor="tempo">Tempo:</label>
+    <input className={classes.progressBar}
         type="range"
         id="tempo"
         min="0.5"

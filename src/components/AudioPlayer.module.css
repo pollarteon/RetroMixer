@@ -1,10 +1,19 @@
+.audioPlayerContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .audioPlayer {
   --primary: #f40082;
   --secondary: #ffd200;
 
   align-items: center;
   display: flex;
-  width: 700px;
+  flex-direction: column;
+  width: 750px;
 }
 
 .forwardBackward {
@@ -24,14 +33,15 @@
 .playPause {
   background: var(--primary);
   border: none;
-  border-radius: 75%;
-  width: 75px;
-  height: 75px;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
   font-size: 32px;
   color: var(--secondary);
   display: flex;
   justify-content: center;
   align-items:center;
+  gap: 2em;
 }
 
 .play {
@@ -43,12 +53,13 @@
 .duration {
   font-family: monospace;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .currentTime {
-  margin-left: 25px;
+  margin-left: 30px;
 }
-
+ 
 .progressBar {
   --bar-bg: #ffd200;
   --seek-before-width: 0;
