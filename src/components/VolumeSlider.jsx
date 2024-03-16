@@ -1,7 +1,8 @@
 import { FaVolumeOff } from "react-icons/fa6";
 import { FaVolumeLow } from "react-icons/fa6";
 import { FaVolumeHigh } from "react-icons/fa6";
-import classes from "./TempoSlider.module.css"
+import classes from "./VolumeSlider.module.css"
+import { motion } from "framer-motion";
 export default function VolumeSlider({volume,setVolume}){
   
   const handleVolumeChange = (event) => {
@@ -19,7 +20,10 @@ export default function VolumeSlider({volume,setVolume}){
     iconType=3
   }
   return (
-    <div className={classes.inputWrapper}>
+    <motion.div
+    initial={{scale:0}}
+    animate={{scale:1}}
+    className={classes.inputWrapper}>
     <label htmlFor="volume">
       {
         iconType==3 && <FaVolumeHigh/> 
@@ -31,7 +35,7 @@ export default function VolumeSlider({volume,setVolume}){
         iconType==1 && <FaVolumeLow/> 
       }
     </label>
-    <input className={classes.progressBar}
+    <input className={classes.progressBar + ' ' + classes.zindex}
         type="range"
         id="volume"
         min="0"
@@ -40,8 +44,8 @@ export default function VolumeSlider({volume,setVolume}){
         value={volume}
         onChange={handleVolumeChange}
       />
-      <p>{volume}</p>
-    </div>
+      <p className={classes.value}>{volume}</p>
+    </motion.div>
     
   )
 }

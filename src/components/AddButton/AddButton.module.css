@@ -1,6 +1,6 @@
 .addButton{
-  background-color:#0B0E1F;
-  color:#F9DE1F;
+  background-color:#005F73 ;
+  color:#EBD7A5;
   padding: 1em;
   border-radius: 1em;
   display: flex;
@@ -10,6 +10,8 @@
   transition: all 200ms;
 }
 .addButton:hover{
-  background-color: #0D173B
+  background-color: #EBD7A5;
+  color: #005F73 
   ;
+  box-shadow: 3px -3px 0px 0px #005F73;
 }

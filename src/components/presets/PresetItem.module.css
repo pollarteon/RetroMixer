@@ -1,0 +1,28 @@
+.presetItem{
+}
+.beats .drum{
+  width:100px;
+  height:100px;
+  border-radius:10px;
+  background:linear-gradient(rgb(255, 234, 0),#ad1ea6);
+}
+
+.beatsButton{
+  cursor:pointer;
+  margin-top:10px;
+  margin-left:10px;
+  text-transform:uppercase;
+  border:solid pink;
+}
+.beatSpan{
+  bottom:20px;
+  width:100%;
+  font-size:1.0rem;
+  text-align: center;
+}
+.activeButton{
+  width:100px;
+  height:100px;
+  border-radius:10px;
+  background:linear-gradient(rgb(255, 234, 0),red);
+}

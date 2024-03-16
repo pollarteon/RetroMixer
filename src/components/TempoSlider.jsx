@@ -1,5 +1,4 @@
-import { audioActions } from "../store/audioSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import classes from "./TempoSlider.module.css"
 export default function TempoSlider({tempo,setTempo}){
   
@@ -8,7 +7,10 @@ export default function TempoSlider({tempo,setTempo}){
     setTempo(newTempo)
   };
   return (
-    <div className={classes.inputWrapper}>
+    <motion.div
+      initial={{scale:0}}
+      animate={{scale:1}}
+    className={classes.inputWrapper}>
     <label className={classes.tempoLabel} htmlFor="tempo">Tempo:</label>
     <input className={classes.progressBar}
         type="range"
@@ -19,8 +21,8 @@ export default function TempoSlider({tempo,setTempo}){
         value={tempo}
         onChange={handeTempoChange}
       />
-      <p>{tempo}</p>
-    </div>
+      <p className={classes.value}>{tempo}</p>
+    </motion.div>
     
   )
 }

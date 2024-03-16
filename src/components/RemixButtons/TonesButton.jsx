@@ -1,5 +1,6 @@
 import * as Tone from "tone"
-export default function TonesButton({keybutton}){
+import classes from "./TonesButton.module.css"
+export default function TonesButton({keybutton,color}){
 let synth = new Tone.Synth().toDestination();
 
   function handlePlay(){
@@ -9,6 +10,6 @@ let synth = new Tone.Synth().toDestination();
       synth.triggerAttackRelease(`${keybutton}`, "8n");
   }
   return (
-    <button  onClick={handlePlay}>PLAY {keybutton}</button>
+    <button className={classes[`${color}`]+' '+classes['piano-key']}  onClick={handlePlay}><span className={classes.pianoSpan}>{keybutton}</span></button>
   )
 }

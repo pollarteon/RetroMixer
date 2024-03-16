@@ -1,0 +1,20 @@
+.presetContainer{
+  background-color: #EBD7A5 ;
+  font-family: monospace;
+  border-radius: 1em;
+  border: solid black 2px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.liStyle{
+  list-style: none;
+}
+.ulStyle{
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

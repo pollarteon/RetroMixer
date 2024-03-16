@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./AudioPlayer.module.css";
-import { BsArrowLeftShort } from "react-icons/bs";
-import { BsArrowRightShort } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa";
 import TempoSlider from "./TempoSlider";
 import VolumeSlider from "./VolumeSlider";
 import AudioFiles from "./AudioFiles";
 import AddButton from "./AddButton/AddButton";
-
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 export default function AudioPlayer({ audioArray }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -80,16 +79,6 @@ export default function AudioPlayer({ audioArray }) {
     );
     setCurrentTime(progressBar.current.value);
   };
-
-  const backThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value - 30);
-    changeRange();
-  };
-
-  const forwardThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value + 30);
-    changeRange();
-  };
   if (audioPlayer.current) {
     audioPlayer.current.playbackRate = tempo;
     audioPlayer.current.volume = volume;
@@ -101,42 +90,51 @@ export default function AudioPlayer({ audioArray }) {
     setDisplayDropBox(false);
   }
   return (
-    <div className={styles.audioPlayerContainer}>
-      <div className={styles.audioPlayer}>
-        <audio ref={audioPlayer} src={src} preload="metadata"></audio>
-        <button className={styles.forwardBackward} onClick={backThirty}>
-          <BsArrowLeftShort /> 30
-        </button>
-        <button onClick={togglePlayPause} className={styles.playPause}>
-          {isPlaying ? <FaPause /> : <FaPlay className={styles.play} />}
-        </button>
-        <button className={styles.forwardBackward} onClick={forwardThirty}>
-          30 <BsArrowRightShort />
-        </button>
-        <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
-        <div>
-          <input
-            type="range"
-            className={styles.progressBar}
-            defaultValue="0"
-            ref={progressBar}
-            onChange={changeRange}
-          />
+    <div className={styles.audioPlayerWrapper}>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className={styles.audioPlayerContainer}
+      >
+        <div className={styles.audioPlayer}>
+          <audio ref={audioPlayer} src={src} preload="metadata"></audio>
+          <motion.button
+            initial={{ scale: 0 }}
+            whileHover={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            onClick={togglePlayPause}
+            className={styles.playPause}
+          >
+            {isPlaying ? <FaPause /> : <FaPlay className={styles.play} />}
+          </motion.button>
+
+          <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
+          <div>
+            <input
+              type="range"
+              className={styles.progressBar}
+              defaultValue="0"
+              ref={progressBar}
+              onChange={changeRange}
+            />
+          </div>
+          <div className={styles.duration}>
+            {duration && !isNaN(duration) && calculateTime(duration)}
+          </div>
         </div>
-        <div className={styles.duration}>
-          {duration && !isNaN(duration) && calculateTime(duration)}
-        </div>
-      </div>
-      <TempoSlider tempo={tempo} setTempo={setTempo} />
-      <VolumeSlider volume={volume} setVolume={setVolume} />
-      <AddButton label={"Audio"} onclickFunction={openDropBox} />
-      {displayDropBox && (
-        <AudioFiles
-          audioArray={audioArray}
-          setSrc={setSrc}
-          closeDropBox={closeDropBox}
-        />
-      )}
+        <TempoSlider tempo={tempo} setTempo={setTempo} />
+        <VolumeSlider volume={volume} setVolume={setVolume} />
+        <AddButton label={"Audio"} onclickFunction={openDropBox} />
+        <AnimatePresence>
+          {displayDropBox && (
+            <AudioFiles
+              audioArray={audioArray}
+              setSrc={setSrc}
+              closeDropBox={closeDropBox}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }

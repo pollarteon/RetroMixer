@@ -4,13 +4,17 @@
   justify-content: center;
   align-items: center;
 }
- 
+.value{
+  font-size: large;
+  font-family: monospace;
+}
+
 .progressBar {
-  --bar-bg: #ffd200;
+  --bar-bg: #ED9B00;
   --seek-before-width: 0;
-  --seek-before-color: #f40082;
-  --knobby: #f40082;
-  --selectedKnobby: #26c9c3;
+  --seek-before-color: #099396;
+  --knobby: #099396;
+  --selectedKnobby: #93D2BD;
 
   appearance: none;
   background: var(--bar-bg);;
