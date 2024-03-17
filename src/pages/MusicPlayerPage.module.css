@@ -32,6 +32,16 @@
     width:100%
   }
 }
+.navButton{
+  background-color: #f7ba2c ;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 1em;
+  font-family: monospace;
+  font-weight: 600;
+  width: 400px;
+  font-size: 0.75em;
+}
 .color{
   color:#01121A ;
   color:#005F73  ;
@@ -45,4 +55,6 @@
   color:#9C2227  ;
   color:#ea5459  ;
   color:#f7ba2c  ;
+  color:#E3DCD6  ;
+  color:#350714  ;
 }

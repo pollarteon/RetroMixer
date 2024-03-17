@@ -3,6 +3,7 @@ import AudioPlayer from "../components/AudioPlayer";
 import RemixBoard from "../components/RemixBoard";
 import PresetList from "../components/presets/PresetList";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 export default function MusicPlayerPage() {
   const beatsArray = [
     "/audio/Beat 1.mp3",
@@ -46,11 +47,17 @@ export default function MusicPlayerPage() {
 
   return (
     <>
-      <motion.h1
-      initial={{opacity:0}}
-      animate={{opacity:1}}
-      className={classes.heading}
-      >Retro Remix Music Player</motion.h1>
+      <Link to={"/"}>
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={classes.heading}
+          whileHover={{scale:1.05}}
+        >
+          <button className={classes.navButton}>Home</button>
+        </motion.h1>
+      </Link>
+
       <div className={classes.appContainer}>
         <motion.div className={classes.audioPlayer1}>
           <AudioPlayer audioArray={songsArray} />

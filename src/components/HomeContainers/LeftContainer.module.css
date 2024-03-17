@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Lato&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;1,900&family=Roboto+Mono:wght@700&display=swap');
+
+.mainContainer{
+  display: flex;
+}
+.heading{
+  font-family: "Libre Bodoni", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  font-size: 3em;
+}
+.heading2{
+  font-family: "Libre Bodoni", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  text-align: center;
+}
+.leftContainer{
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:0 4em 0 4em;
+}
+.rightContainer{
+  display: flex;
+  flex-direction: column;
+}
+.navButton{
+  background-color: #f7ba2c ;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 1em;
+  font-family: monospace;
+  font-weight: 600;
+}
+.inline{
+  display: inline;
+}
+.image{
+  width: 500px;
+  height: 500px;
+  border-radius: 10em;
+  object-fit: contain;
+}
